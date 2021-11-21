@@ -33,7 +33,7 @@
                         <a class="tab-enabled" id="sample-tab-haxe" href="#haxe">.hx</a>
                     </div>
                 </div>
-                <div id="sample-panel-content" class="sample-panel-content">
+                <div id="openfl-content" class="openfl-content">
                 </div>
                 <div class="sample-panel-footer">
                     <div class="sample-panel-info" id="sample-info"></div>
@@ -294,8 +294,8 @@
                             $(this).html("Could not load file!");
                         }
                     });
-                $("#sample-panel-content").removeAttr("style");
-                $("#sample-panel-content").css("background-color", "#333333");
+                $("#openfl-content").removeAttr("style");
+                $("#openfl-content").css("background-color", "#333333");
 
                 $("#sample-tab-html5").addClass("tab-disabled").
                                      removeClass("tab-enabled").
@@ -320,10 +320,10 @@
             function sampleHaxe() {
                 window.location.hash = ("haxe-" + sampleName);
 
-                $("#sample-panel-content").html('');
-                $("#sample-panel-content").empty();
+                $("#openfl-content").html('');
+                $("#openfl-content").empty();
                 var pre = $('<pre class="prettyprint darkered codestyle linenums"></pre>');
-                $("#sample-panel-content").append(pre);
+                $("#openfl-content").append(pre);
 
                 $.ajax({
                     url: "samples/"+sampleName+"/"+sampleName+".hx",
@@ -340,14 +340,14 @@
 
                 $("#sample-info").css("display", "none");
 
-                $("#sample-panel-content").css("overflow", "auto");
+                $("#openfl-content").css("overflow", "auto");
                 $("#sample-tab-haxe").addClass("tab-disabled").
                                       removeClass("tab-enabled").
                                       removeAttr('href');
 
                 var html5 = $("#sample-tab-html5");
                 if (html5.hasClass("tab-disabled")) {
-                    $("#sample-panel-content").removeClass("flash-replaced");
+                    $("#openfl-content").removeClass("flash-replaced");
                     html5.addClass("tab-enabled").
                         removeClass("tab-disabled").
                         attr('href', '#html5');
@@ -372,7 +372,7 @@
                 });
 
                 // Clear sample content.
-                $("#sample-panel-content").html("");
+                $("#openfl-content").html("");
             });
 
             $(".sample-link").click(function (event) {
