@@ -7,10 +7,10 @@
   <window background="#333333" width="800" height="600" fps="60" />
 
 	<source path="." />
+
+  <haxelib name="openfl" />	
+  <haxelib name="nape-haxe4" />
 	
   <!-- We need to do this to get the index.html to work in a subdirectory. -->
   <template path="index.html" rename="index.html" />
-
-	<haxelib name="openfl" />	
-  <haxelib name="nape-haxe4" />
 </project>

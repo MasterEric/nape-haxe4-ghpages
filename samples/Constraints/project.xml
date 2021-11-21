@@ -9,6 +9,12 @@
 	<source path="." />
   <source path="../common" />
 	
+  
 	<haxelib name="openfl" />	
   <haxelib name="nape-haxe4" />
+
+  <!-- We need to do this to get the index.html to work in a subdirectory. -->
+  <template path="index.html" rename="index.html" />
+
+  
 </project>
