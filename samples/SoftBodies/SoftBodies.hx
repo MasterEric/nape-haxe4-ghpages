@@ -35,7 +35,7 @@ import nape.shape.Circle;
 import nape.shape.Edge;
 import nape.shape.Polygon;
 
-import flash.display.Sprite;
+import openfl.display.Sprite;
 
 // Template class is used so that this sample may
 // be as concise as possible in showing Nape features without

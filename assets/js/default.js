@@ -36,7 +36,7 @@ $(document).ready(function () {
         right.append(topRow);
         topRow.append($('<td></td>').
               append($('<span class="title-font">Nape Physics Engine</span>')).
-              append($('<span class="title-font-sm"> / Cross platform 2D physics for AS3/Haxe</span>'))
+              append($('<span class="title-font-sm"> / Cross platform 2D physics for Haxe</span>'))
         );
         topRow.append($('<td width="auto"></td>').
               append($('<a href="http://www.github.com/deltaluca"><img class="github" src="'+rt+'assets/github.png" alt="github"/></a>'))

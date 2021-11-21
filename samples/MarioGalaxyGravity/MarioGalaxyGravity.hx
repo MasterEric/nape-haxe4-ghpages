@@ -62,8 +62,9 @@ class MarioGalaxyGravity extends Template {
 
         // Create the central planet.
         var planet = new Body(BodyType.STATIC);
+        var starIso = new StarIso();
         var polys = MarchingSquares.run(
-            new StarIso(),
+            starIso.iso,
             new AABB(0, 0, w, h),
             new Vec2(5, 5)
         );

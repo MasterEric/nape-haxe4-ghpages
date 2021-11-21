@@ -36,7 +36,7 @@ import nape.util.Debug;
 // any of the boilerplate that makes up the sample interfaces.
 import Template;
 
-import flash.display.DisplayObject;
+import openfl.display.DisplayObject;
 
 class Viewports extends Template {
     function new() {
@@ -141,7 +141,7 @@ class Viewports extends Template {
             // Create a debug-DisplayObject-graphic
             // We start off with a faded graphic until it enters a viewport.
             var graphic = Debug.createGraphic(body);
-            graphic.alpha = 0.25;
+            graphic.alpha = 1.0;
             addChild(graphic);
 
             // Store in userData so viewport listeners can get access to it.
@@ -164,7 +164,7 @@ class Viewports extends Template {
         var viewableBody = cb.int2.castBody;
 
         var graphic:DisplayObject = viewableBody.userData.graphic;
-        graphic.alpha = 0.25;
+        graphic.alpha = 1.0;
     }
 
     override function postUpdate(deltaTime:Float) {

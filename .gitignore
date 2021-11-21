@@ -1,5 +1,2 @@
-*.swp
-*.swo
 
-main.swf
-preloader.swf
+samples/**/export/html5/haxe/

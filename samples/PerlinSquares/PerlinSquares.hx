@@ -30,7 +30,7 @@ import nape.geom.Vec2;
 // any of the boilerplate that makes up the sample interfaces.
 import Template;
 
-class PerlinSquares extends Template, implements IsoFunction {
+class PerlinSquares extends Template {
     function new() {
         // We use ShapeDebug as rendering large amounts of filled polygons
         // is slower with BitmapDebug.
@@ -85,7 +85,7 @@ class PerlinSquares extends Template, implements IsoFunction {
         // Here, we're supplying a GeomPolyList in which to return the results
         // to avoid creating a new List every single time.
         var polygons = MarchingSquares.run(
-            this, bounds, cellSize, 2,
+            iso, bounds, cellSize, 2,
             gridSize, true, output
         );
 
@@ -128,11 +128,17 @@ class PerlinSquares extends Template, implements IsoFunction {
         else if(h<=300) { r = f;   g = 0;   b = 1;   }
         else            { r = 1;   g = 0;   b = 1-f; }
 
+        #if flash
         // untyped __int__ performs better than Std.int when we're only
         // targetting flash.
         var red:Int = untyped __int__(r*0xff);
         var grn:Int = untyped __int__(g*0xff);
         var blu:Int = untyped __int__(b*0xff);
+        #else
+        var red:Int = Std.int(r*0xff);
+        var grn:Int = Std.int(g*0xff);
+        var blu:Int = Std.int(b*0xff);
+        #end
         return (red << 16) | (grn << 8) | blu;
     }
 
@@ -143,11 +149,18 @@ class PerlinSquares extends Template, implements IsoFunction {
 
 class Perlin3D {
     public static inline function noise(x:Float, y:Float, z:Float) {
+        #if flash
         // untyped __int__ performs better than Std.int when we're only
         // targetting flash.
         var X:Int = untyped __int__(x); x -= X; X &= 0xff;
         var Y:Int = untyped __int__(y); y -= Y; Y &= 0xff;
         var Z:Int = untyped __int__(z); z -= Z; Z &= 0xff;
+        #else
+        // If we're not targeting Flash we need Std.int for compatibility.
+        var X:Int = Std.int(x); x -= X; X &= 0xff;
+        var Y:Int = Std.int(y); y -= Y; Y &= 0xff;
+        var Z:Int = Std.int(z); z -= Z; Z &= 0xff;
+        #end
         var u = fade(x); var v = fade(y); var w = fade(z);
         var A = p(X)  +Y; var AA = p(A)+Z; var AB = p(A+1)+Z;
         var B = p(X+1)+Y; var BA = p(B)+Z; var BB = p(B+1)+Z;
@@ -161,8 +174,8 @@ class Perlin3D {
                                        grad(p(BB+1), x-1, y-1, z-1 ))));
     }
 
-    static inline function fade(t:Float) return t*t*t*(t*(t*6-15)+10)
-    static inline function lerp(t:Float, a:Float, b:Float) return a + t*(b-a)
+    static inline function fade(t:Float) return t*t*t*(t*(t*6-15)+10);
+    static inline function lerp(t:Float, a:Float, b:Float) return a + t*(b-a);
     static inline function grad(hash:Int, x:Float, y:Float, z:Float) {
         var h = hash&15;
         var u = h<8 ? x : y;
@@ -170,7 +183,7 @@ class Perlin3D {
         return ((h&1) == 0 ? u : -u) + ((h&2) == 0 ? v : -v);
     }
 
-    static inline function p(i:Int) return perm[i]
+    static inline function p(i:Int) return perm[i];
     static var perm:#if flash10 flash.Vector<Int> #else Array<Int> #end;
 
     public static function initNoise() {

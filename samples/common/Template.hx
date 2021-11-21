@@ -1,14 +1,14 @@
 package;
 
-import flash.display.StageQuality;
-import flash.display.Sprite;
-import flash.events.KeyboardEvent;
-import flash.events.MouseEvent;
-import flash.events.Event;
-import flash.system.System;
-import flash.text.TextField;
-import flash.text.TextFormat;
-import flash.Lib;
+import openfl.display.StageQuality;
+import openfl.display.Sprite;
+import openfl.events.KeyboardEvent;
+import openfl.events.MouseEvent;
+import openfl.events.Event;
+import openfl.system.System;
+import openfl.text.TextField;
+import openfl.text.TextFormat;
+import openfl.Lib;
 
 import nape.space.Space;
 import nape.space.Broadphase;
@@ -40,7 +40,7 @@ typedef TemplateParams = {
 class Template extends Sprite {
 
     var space:Space;
-    var debug:Debug;
+    var debug:ShapeDebug;
     var hand:PivotJoint;
 
     var variableStep:Bool;
@@ -57,7 +57,7 @@ class Template extends Sprite {
     var params:TemplateParams;
     var useHand:Bool;
     function new(params:TemplateParams) {
-        baseMemory = System.totalMemoryNumber;
+        baseMemory = System.totalMemory;
         super();
 
         if (params.velIterations != null) {
@@ -103,13 +103,8 @@ class Template extends Sprite {
             stage.addEventListener(KeyboardEvent.KEY_UP, keyUp);
         }
 
-        if (params.shapeDebug == null || !params.shapeDebug) {
-            debug = new BitmapDebug(stage.stageWidth, stage.stageHeight, stage.color);
-        }
-        else {
-            debug = new ShapeDebug(stage.stageWidth, stage.stageHeight, stage.color);
-            stage.quality = StageQuality.LOW;
-        }
+        debug = new ShapeDebug(stage.stageWidth, stage.stageHeight, stage.color);
+        debug.thickness = 4;
 
         debug.drawConstraints = true;
         addChild(debug.display);
@@ -128,7 +123,7 @@ class Template extends Sprite {
         addChild(textField);
     }
 
-    function random() return Math.random()
+    function random() return Math.random();
 
     function createBorder() {
         var border = new Body(BodyType.STATIC);
@@ -164,7 +159,8 @@ class Template extends Sprite {
                     hand.space = space;
                 }
             }
-            System.pauseForGCIfCollectionImminent(0);
+            // Obsolete on OpenFL.
+            // System.pauseForGCIfCollectionImminent(0);
             init();
         }
     }
@@ -221,7 +217,7 @@ class Template extends Sprite {
         var fps = (1000 / deltaTime);
         smoothFps = (smoothFps == -1 ? fps : (smoothFps * 0.97) + (fps * 0.03));
         var text = "fps: " + ((""+smoothFps).substr(0, 5)) + "\n" +
-                   "mem: " + ((""+(System.totalMemoryNumber - baseMemory) / (1024 * 1024)).substr(0, 5)) + "Mb";
+                   "mem: " + ((""+(System.totalMemory - baseMemory) / (1024 * 1024)).substr(0, 5)) + "Mb";
         if (space != null) {
             text += "\n\n"+
                     "velocity-iterations: " + velIterations + "\n" +

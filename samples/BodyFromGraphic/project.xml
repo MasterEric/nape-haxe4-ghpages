@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+	
+	<meta title="BodyFromGraphic" package="org.openfl.nape.samples.bodyfromgraphic" version="1.0.0" company="OpenFL" />
+	<app main="BodyFromGraphic" path="export" file="BodyFromGraphic" />
+	
+  <window background="#333333" width="800" height="600" fps="60" />
+
+	<source path="." />
+  <source path="../common" />
+	
+	<haxelib name="openfl" />	
+  <haxelib name="nape-haxe4" />
+
+	<assets path="assets" preload="true" />
+
+</project>

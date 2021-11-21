@@ -24,13 +24,12 @@ import nape.shape.Polygon;
 // any of the boilerplate that makes up the sample interfaces.
 import Template;
 
-import flash.display.Bitmap;
-import flash.display.BitmapData;
-import flash.display.DisplayObject;
-import flash.display.Sprite;
-import flash.display.StageQuality;
+import openfl.display.Bitmap;
+import openfl.display.BitmapData;
+import openfl.display.DisplayObject;
+import openfl.display.Sprite;
+import openfl.display.StageQuality;
 
-@:bitmap("cog.png") class Cog extends BitmapData {}
 class BodyFromGraphic extends Template {
     function new() {
         super({
@@ -47,11 +46,13 @@ class BodyFromGraphic extends Template {
 
         createBorder();
 
+        var cogBitmap = openfl.Assets.getBitmapData("assets/cog.png", true);
+
         // Create some Bodies generated from a Bitmap (the cogs)
         // With a body generated from a DisplayObject inside
         // (the intersected circles).
-        var cogIso = new BitmapDataIso(new Cog(0,0), 0x80);
-        var cogBody = IsoBody.run(cogIso, cogIso.bounds);
+        var cogIso = new BitmapDataIso(cogBitmap, 0x80);
+        var cogBody = IsoBody.run(cogIso.iso, cogIso.bounds);
 
         function circles() {
             var displayObject = new Sprite();
@@ -67,7 +68,7 @@ class BodyFromGraphic extends Template {
         // Flash requires an object to be on stage for hitTestPoint used
         // by the iso-function to work correctly. SIGH.
         addChild(objIso.displayObject);
-        var objBody = IsoBody.run(objIso, objIso.bounds);
+        var objBody = IsoBody.run(objIso.iso, objIso.bounds);
         removeChild(objIso.displayObject);
 
         for (i in 0...4) {
@@ -145,7 +146,7 @@ class IsoBody {
     }
 }
 
-class DisplayObjectIso implements IsoFunction {
+class DisplayObjectIso {
     public var displayObject:DisplayObject;
     public var bounds:AABB;
 
@@ -163,7 +164,7 @@ class DisplayObjectIso implements IsoFunction {
     }
 }
 
-class BitmapDataIso implements IsoFunction {
+class BitmapDataIso {
     public var bitmap:BitmapData;
     public var alphaThreshold:Float;
     public var bounds:AABB;

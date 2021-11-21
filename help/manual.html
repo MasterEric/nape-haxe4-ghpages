@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta name="description" content="Nape is an open source physics library for Haxe and ActionScript3."/>
-        <meta name="keywords" content="Nape,Physics,Haxe,AS3,Flash,Constraint,Rigid,Body,Shape,"/>
+        <meta name="keywords" content="Nape,Physics,Haxe,Flash,Constraint,Rigid,Body,Shape,"/>
         <meta name="author" content="Luca Deltodesco"/>
         <meta charset="UTF-8"/>
 
@@ -31,12 +31,11 @@
                 <strong><span class="section">About</span></strong>
                 <p>
                     <b>Nape</b> is a 2D rigid body physics engine designed for games, written in <b>Haxe</b>, and
-                    supporting all Haxe targets. <b>Nape</b> is compiled into <b>.swc</b> libraries for AS3 users.
-                    <b>Nape</b> is written for ease of development, with a powerful and succinct API that
+                    supporting all Haxe targets. <b>Nape</b> is written for ease of development, with a powerful and succinct API that
                     <i>(outside of a release build)</i> checks it is being used correctly, and reports <b>errors</b> if it is not.
                 </p>
                 <p>
-                    <b>Nape</b> is higher performing than <b>Box2D</b> solutions in AS3/Haxe, and its memory usage is
+                    <b>Nape</b> is higher performing than <b>Box2D</b> solutions in Haxe, and its memory usage is
                     stable and far less than Box2D. <b>Nape</b> supports the majority of Box2D features, as well as many
                     features not included in Box2D such as the <b>geometric utilities</b>, the <b>high-level callbacks</b>
                     system, and more sophisticated <b>buoyancy</b>.
@@ -79,25 +78,14 @@
                 </p>
                 <strong><span class="section">API design</span></strong>
                 <p>
-                    <b>Nape</b> has an API that is in some regards, perhaps unusual compared to the majority of Haxe and AS3
+                    <b>Nape</b> has an API that is in some regards, perhaps unusual compared to the majority of Haxe
                     APIs. These aspects should be intuitive <i>(if surprisingly so)</i>. For <b>Haxe</b> users, <b>Nape</b> has been written
                     with the <b>flash</b> target as its main focus, and many API choices reflect this by using only a
                     subset of <b>Haxe</b> that has direct equivalents in <b>AS3</b>.
                 </p>
                 <ul>
                     <li>
-                        In <b>AS3</b> you may be more familiar with enumerations <i>(eg. Event::type)</i> as being
-                        <b>Strings</b>; in <b>Nape</b> enumerations are strictly-typed as a set of read-only, static
-                        fields of the corresponding enum class. <i>(Haxe users, these are not the same as Haxe enums).</i>
-                        <pre class="prettyprint standard boxedcode largecodestyle">
-var dynamicType:BodyType = BodyType.DYNAMIC;</pre>
-                        There are of course, reasons why this is very good; it is <b>impossible</b> to assign an enumeration
-                        value that is invalid, and when accessing a property of an object, you <b>know</b> that it is an
-                        enumeration, and what values it can take.
-                    </li>
-                    <br/>
-                    <li>
-                        In the <b>Flash</b> API, you can often find instances where you have to do things like:
+                        In the <b>Flash/OpenFL</b> API, you can often find instances where you have to do things like:
                         <pre class="prettyprint standard boxedcode largecodestyle">
 sprite.filters.push(blurFilter);
 sprite.filters = sprite.filters; // &lt;--
@@ -165,10 +153,6 @@ bodyPosition.x = 10;
                 </p>
             </div>
 
-
-
-
-
             <hr class="hrchapter"/>
             <div class="chapter"><strong><span class="title">Hello Nape</span></strong>
                 <div class="contents" id="skip-Hello Nape"></div>
@@ -176,7 +160,7 @@ bodyPosition.x = 10;
                     In this chapter, we will look at creating a basic simulation with <b>Nape</b>.
                 </p>
                 <p>
-                    This chapter reads like a <b>tutorial</b>, and for example source code you should check the <a class="doclink" href="../samples.html#swf-BasicSimulation">BasicSimulation</a> code sample.
+                    This chapter reads like a <b>tutorial</b>, and for example source code you should check the <a class="doclink" href="../samples.html#html5-BasicSimulation">BasicSimulation</a> code sample.
                 </p>
                 <strong><span class="section">Setting up a Space</span></strong>
                 <p>
@@ -356,7 +340,7 @@ space.step(deltaTime);</pre>
                     for the bitmap.
                 </p>
                 <pre class="prettyprint largecodestyle standard boxedcode">
-var debug:Debug = new BitmapDebug(stage.stageWidth, stage.stageHeight, stage.color);</pre>
+var debug:Debug = new ShapeDebug(stage.stageWidth, stage.stageHeight);</pre>
                 <p>
                     To display the debug view on the screen, you will add <b>debug.display</b> to the <b>DisplayList</b>.
                 </p>

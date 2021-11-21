@@ -31,11 +31,11 @@ import nape.space.Space;
 // any of the boilerplate that makes up the sample interfaces.
 import Template;
 
-import flash.display.BitmapData;
-import flash.display.BitmapDataChannel;
-import flash.display.BlendMode;
-import flash.display.Sprite;
-import flash.geom.Matrix;
+import openfl.display.BitmapData;
+import openfl.display.BitmapDataChannel;
+import openfl.display.BlendMode;
+import openfl.display.Sprite;
+import openfl.geom.Matrix;
 
 class DestructibleTerrain extends Template {
     function new() {
@@ -56,8 +56,14 @@ class DestructibleTerrain extends Template {
         createBorder();
 
         // Initialise terrain bitmap.
-        var bit = new BitmapData(w, h, true, 0);
+        #if flash
+        var bit = new BitmapData(100, 100, true, 0);
         bit.perlinNoise(200, 200, 2, 0x3ed, false, true, BitmapDataChannel.ALPHA, false);
+        #else
+        // In OpenFL the perlin noise function doesn't work? IDK.
+        // Use some pre-drawn terrain.
+        var bit = openfl.Assets.getBitmapData("assets/terrain.png");
+        #end
 
         // Create initial terrain state, invalidating the whole screen.
         terrain = new Terrain(bit, 30, 5);
@@ -65,13 +71,42 @@ class DestructibleTerrain extends Template {
 
         // Create bomb sprite for destruction
         bomb = new Sprite();
-        bomb.graphics.beginFill(0xffffff, 1);
+        bomb.graphics.beginFill(0x000000, 1);
         bomb.graphics.drawCircle(0, 0, 40);
     }
 
     function explosion(pos:Vec2) {
         // Erase bomb graphic out of terrain.
+        #if flash
+        // This logic does not work in the new OpenFL API for whatever reason.
+        // It adds terrain instead of deleting it. Cool idea though.
         terrain.bitmap.draw(bomb, new Matrix(1, 0, 0, 1, pos.x, pos.y), null, BlendMode.ERASE);
+        #else
+        // New logic copied from sample: https://github.com/HaxeFlixel/flixel-demos/blob/master/Features/FlxNapeTerrain/source/PlayState.hx
+        var region = AABB.fromRect(bomb.getBounds(bomb));
+        var radius:Int = Std.int(region.width / 2);
+        var diameter:Int = 2 * radius;
+        var radiusSquared:Int = radius * radius;
+        var centerX:Int = Std.int(pos.x);
+        var centerY:Int = Std.int(pos.y);
+        var dx:Int, dy:Int;
+    
+        for (x in 0...diameter)
+        {
+          for (y in 0...diameter)
+          {
+            dx = radius - x;
+            dy = radius - y;
+            if ((dx * dx + dy * dy) > radiusSquared)
+            {
+              continue;
+            }
+            // Set pixels to transparent.
+            // NOTE: Set to a different color to add terrain.
+            terrain.bitmap.setPixel32(centerX + dx, centerY + dy, 0x00000000);
+          }
+        }
+        #end
 
         // Invalidate region of terrain effected.
         var region = AABB.fromRect(bomb.getBounds(bomb));
@@ -100,7 +135,7 @@ class DestructibleTerrain extends Template {
     }
 }
 
-class Terrain implements IsoFunction {
+class Terrain {
     public var bitmap:BitmapData;
 
     var cellSize:Float;
@@ -147,7 +182,7 @@ class Terrain implements IsoFunction {
             isoBounds.x = x*cellSize;
             isoBounds.y = y*cellSize;
             var polys = MarchingSquares.run(
-                this,
+                iso,
                 isoBounds,
                 isoGranularity,
                 isoQuality

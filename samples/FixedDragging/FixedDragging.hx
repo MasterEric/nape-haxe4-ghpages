@@ -12,11 +12,11 @@ package;
  *
  */
 
-import flash.Lib;
-import flash.display.Sprite;
-import flash.events.Event;
-import flash.events.KeyboardEvent;
-import flash.events.MouseEvent;
+import openfl.Lib;
+import openfl.display.Sprite;
+import openfl.events.Event;
+import openfl.events.KeyboardEvent;
+import openfl.events.MouseEvent;
 
 import nape.constraint.PivotJoint;
 import nape.geom.Vec2;
@@ -25,13 +25,12 @@ import nape.phys.BodyType;
 import nape.shape.Circle;
 import nape.shape.Polygon;
 import nape.space.Space;
-import nape.util.BitmapDebug;
-import nape.util.Debug;
+import nape.util.ShapeDebug;
 
 class FixedDragging extends Sprite {
 
     var space:Space;
-    var debug:Debug;
+    var debug:ShapeDebug;
     var handJoint:PivotJoint;
 
     var prevTimeMS:Int;
@@ -58,7 +57,7 @@ class FixedDragging extends Sprite {
         //   Default gravity is (0, 0)
         space = new Space();
 
-        // Create a new BitmapDebug screen matching stage dimensions and
+        // Create a new ShapeDebug screen matching stage dimensions and
         // background colour.
         //
         //   The Debug object itself is not a DisplayObject, we add its
@@ -66,7 +65,8 @@ class FixedDragging extends Sprite {
         //
         //   We additionally set the flag enabling drawing of constraints
         //   when rendering a Space object to true.
-        debug = new BitmapDebug(stage.stageWidth, stage.stageHeight, stage.color);
+        debug = new ShapeDebug(stage.stageWidth, stage.stageHeight);
+        debug.thickness = 4;
         addChild(debug.display);
         debug.drawConstraints = true;
 

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+	
+	<meta title="PerlinSquares" package="org.openfl.nape.samples.perlinsquares" version="1.0.0" company="OpenFL" />
+	<app main="PerlinSquares" path="export" file="PerlinSquares" />
+	
+  <window background="#333333" width="800" height="600" fps="60" />
+
+	<source path="." />
+  <source path="../common" />
+	
+	<haxelib name="openfl" />	
+  <haxelib name="nape-haxe4" />
+</project>

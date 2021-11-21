@@ -10,9 +10,9 @@ package;
  *
  */
 
-import flash.display.Sprite;
-import flash.events.Event;
-import flash.events.KeyboardEvent;
+import openfl.display.Sprite;
+import openfl.events.Event;
+import openfl.events.KeyboardEvent;
 
 import nape.geom.Vec2;
 import nape.phys.Body;
@@ -20,13 +20,12 @@ import nape.phys.BodyType;
 import nape.shape.Circle;
 import nape.shape.Polygon;
 import nape.space.Space;
-import nape.util.BitmapDebug;
-import nape.util.Debug;
+import nape.util.ShapeDebug;
 
 class BasicSimulation extends Sprite {
 
     var space:Space;
-    var debug:Debug;
+    var debug:ShapeDebug;
 
     function new() {
         super();
@@ -50,11 +49,12 @@ class BasicSimulation extends Sprite {
         var gravity = Vec2.weak(0, 600);
         space = new Space(gravity);
 
-        // Create a new BitmapDebug screen matching stage dimensions and
+        // Create a new ShapeDebug screen matching stage dimensions and
         // background colour.
         //   The Debug object itself is not a DisplayObject, we add its
         //   display property to the display list.
-        debug = new BitmapDebug(stage.stageWidth, stage.stageHeight, stage.color);
+        debug = new ShapeDebug(stage.stageWidth, stage.stageHeight, 0x333333);
+        debug.thickness = 4;
         addChild(debug.display);
 
         setUp();

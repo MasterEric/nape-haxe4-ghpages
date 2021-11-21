@@ -33,9 +33,9 @@ import nape.shape.Polygon;
 // any of the boilerplate that makes up the sample interfaces.
 import Template;
 
-import flash.text.TextField;
-import flash.text.TextFormat;
-import flash.text.TextFormatAlign;
+import openfl.text.TextField;
+import openfl.text.TextFormat;
+import openfl.text.TextFormatAlign;
 
 class Constraints extends Template {
     function new() {
@@ -183,7 +183,7 @@ class Constraints extends Template {
         // Description text
         withCell(0, 0, "", function (x, y) {
             var txt = new TextField();
-            var tf = new TextFormat(null,14,0xffffff);
+            var tf = new TextFormat(null,14,0xFFFFFF);
             tf.align = TextFormatAlign.CENTER;
             txt.defaultTextFormat = tf;
             txt.text = "Constraints softened with\nfrequency="+frequency+"\ndamping="+damping;
@@ -200,7 +200,7 @@ class Constraints extends Template {
     // Environment for each cell.
     function withCell(i:Int, j:Int, title:String, f:(Float->Float)->(Float->Float)->Void) {
         var txt = new TextField();
-        var tf = new TextFormat(null,16,0xffffff);
+        var tf = new TextFormat(null,16,0xFFFFFF);
         tf.align = TextFormatAlign.CENTER;
         txt.defaultTextFormat = tf;
         txt.text = title;

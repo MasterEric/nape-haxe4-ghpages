@@ -808,23 +808,23 @@ class PortalManager {
 
 class PortalConstraint extends UserConstraint {
 
-    public var body1(default, set_body1):Body;
-    public var body2(default, set_body2):Body;
-    public var portalBody1(default, set_portalBody1):Body;
-    public var portalBody2(default, set_portalBody2):Body;
+    public var body1(default, set):Body;
+    public var body2(default, set):Body;
+    public var portalBody1(default, set):Body;
+    public var portalBody2(default, set):Body;
 
     /*
         Portal positions+directions defined locally to each portalBody
     */
-    public var position1 (default, set_position1 ):Vec2;
-    public var position2 (default, set_position2 ):Vec2;
-    public var direction1(default, set_direction1):Vec2;
-    public var direction2(default, set_direction2):Vec2;
+    public var position1 (default, set):Vec2;
+    public var position2 (default, set):Vec2;
+    public var direction1(default, set):Vec2;
+    public var direction2(default, set):Vec2;
 
     /*
         Portal scaling from portal1 to portal2
     */
-    public var scale(default, set_scale):Float;
+    public var scale(default, set):Float;
 
     //---------------------------------------------------------------------------
 
