@@ -204,7 +204,7 @@ class MarioGalaxyGravity extends Template {
     }
 }
 
-class StarIso implements IsoFunction {
+class StarIso {
     public function new() {}
     public function iso(x:Float, y:Float) {
         x -= 400;
