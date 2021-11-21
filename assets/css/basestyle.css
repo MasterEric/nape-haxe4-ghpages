@@ -381,7 +381,7 @@ a:hover {
 .sample-title-block .tab-disabled {
     color: #2f90e5;
 }
-.sample-panel-inner .sample-panel-content {
+.sample-panel-inner .openfl-content {
     position: relative;
     width: 800px;
     height: 600px;
@@ -389,10 +389,10 @@ a:hover {
     margin-right: auto;
     background-color: #333333;
 }
-.sample-panel-content embed {
+.openfl-content embed {
     background-color: #333333;
 }
-.sample-panel-content div {
+.openfl-content div {
     overflow: auto;
 }
 .sample-panel-inner .sample-panel-footer {
