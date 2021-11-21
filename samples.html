@@ -287,7 +287,7 @@
                 window.location.hash = ("html5-" + sampleName);
 
                 var name = $("#sample-title").html();
-                $("#sample-panel-content").empty();
+                $("#openfl-content").empty();
                 $("#sample-info").load("samples/"+name+"/output/index.html",
                     function (_, status, _) {
                         if (status === "error") {
