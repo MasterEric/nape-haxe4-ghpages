@@ -288,7 +288,7 @@
 
                 var name = $("#sample-title").html();
                 $("#openfl-content").empty();
-                $("#sample-info").load("samples/"+name+"/output/index.html",
+                $("#sample-info").load("samples/"+name+"/export/html5/bin/index.html",
                     function (_, status, _) {
                         if (status === "error") {
                             $(this).html("Could not load file!");
